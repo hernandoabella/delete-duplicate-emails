@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliminar Correos Duplicados</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+
+        textarea {
+            width: 80%;
+            height: 100px;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h2>Eliminar Correos Duplicados</h2>
+    <p>Pega la lista de correos electrónicos en el siguiente cuadro de texto y haz clic en el botón para eliminar duplicados.</p>
+
+    <textarea id="emailList" placeholder="Pega la lista de correos electrónicos aquí"></textarea>
+    <button onclick="eliminarDuplicados()">Eliminar Duplicados</button>
+
+    <h3>Lista sin Duplicados</h3>
+    <textarea id="resultado" readonly></textarea>
+
+    <h3>Cantidad de Correos Únicos</h3>
+    <p id="cantidadCorreos">0</p>
+
+    <script>
+        function eliminarDuplicados() {
+            // Obtener el valor del textarea
+            var inputText = document.getElementById('emailList').value;
+
+            // Convertir el texto a un array de correos electrónicos
+            var listaCorreos = inputText.split('\n').map(function (email) {
+                return email.trim();
+            });
+
+            // Eliminar duplicados usando un Set y volver a convertir a un array
+            var listaSinDuplicados = [...new Set(listaCorreos)];
+
+            // Mostrar el resultado en el segundo textarea
+            document.getElementById('resultado').value = listaSinDuplicados.join('\n');
+
+            // Mostrar la cantidad de correos únicos
+            document.getElementById('cantidadCorreos').innerText = listaSinDuplicados.length;
+        }
+    </script>
+</body>
+</html>
